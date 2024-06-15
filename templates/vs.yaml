@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: podinfo
+spec:
+  gateways:
+  - istio-system/public-gateway
+  hosts:
+  - test.example.com
+  - podinfo
+  http:
+  - retries:
+      attempts: 3
+      perTryTimeout: 1s
+      retryOn: gateway-error,connect-failure,refused-stream
+    route:
+    - destination:
+        host: podinfo
+      weight: 100

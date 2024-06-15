@@ -1,0 +1,9 @@
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: podinfo
+spec:
+  host: podinfo
+  trafficPolicy:
+    tls:
+      mode: DISABLE
